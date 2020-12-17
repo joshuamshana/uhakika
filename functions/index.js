@@ -11,7 +11,7 @@ exports.shop = BFast.functions().onHttpRequest('/shop',
         bfast.database().table('products')
             .getAll().then(value => {
             response.send(`
-                    <div style="display: flex; height: 100vh; justify-content: center; align-items: center">
+                    <div style="display: flex; height: 100vh; justify-content: center; align-items: center; flex-direction: column">
                         <h1>Coming soon...</h1>
                         <p>${JSON.stringify(value)}</p>
                     </div>
