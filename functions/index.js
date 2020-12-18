@@ -1,3 +1,6 @@
+const {productListComponent} = require("./components/product-list.component");
+const {appBarComponent} = require("./components/app-bar.component");
+const {appLayoutComponent} = require("./components/app-layout.component");
 const {BFast, bfast} = require('bfastnode');
 
 exports.home = BFast.functions().onHttpRequest('/',
@@ -9,19 +12,21 @@ exports.home = BFast.functions().onHttpRequest('/',
 exports.shop = BFast.functions().onHttpRequest('/shop',
     (request, response) => {
         bfast.database().table('products')
-            .getAll().then(value => {
-            response.send(`
-                    <div style="display: flex; height: 100vh; justify-content: center; align-items: center; flex-direction: column">
-                        <h1>Coming soon...</h1>
-                        <p>${JSON.stringify(value)}</p>
-                    </div>
-            `);
+            .query()
+            .orderBy('_created_at', -1)
+            .size(1000000000)
+            .find().then(value => {
+                response.send(
+                    appLayoutComponent(
+                        appBarComponent('Uhakika App'),
+                        productListComponent(value)
+                    )
+                );
         }).catch(reason => {
             response.send(reason)
         })
     }
 );
-
 
 bfast.init({
     applicationId: 'uhakika',
