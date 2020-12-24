@@ -22,7 +22,7 @@ exports.appLayoutComponent = function (appBar, content){
                 <body style="font-family: Roboto,serif">
                     <div>
                         ${appBar}
-                        <div class="container">
+                        <div class="container" style="margin-top: 24px">
                             ${content}
                         </div>
                     </div>

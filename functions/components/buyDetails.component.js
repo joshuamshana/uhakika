@@ -1,5 +1,5 @@
-export.BuyDetails = function(buyingdetails){
-return `
+exports.BuyDetails = function (buyingdetails) {
+    return `
   
   <!DOCTYPE html>
 <html lang="en">
